@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { useState } from 'react';
+import AudioPlayer from './AudioPlayers';
+import FileUpload from './FileUpload';
 
 function App() {
+  const [audioList, setAudioList] = useState([]);
+
+  const handleFileUpload = (fileURL) => {
+    setAudioList((prevAudioList) => [...prevAudioList, fileURL]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Audio Player App</h1>
+      <FileUpload onFileUpload={handleFileUpload} />
+      <AudioPlayer audioList={audioList} />
     </div>
   );
 }
